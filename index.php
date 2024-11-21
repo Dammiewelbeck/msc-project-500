@@ -1,0 +1,5 @@
+<?php 
+
+echo "COCOLA MANAGEMENT SOTFWARE DASHBOARD";
+
+?>
