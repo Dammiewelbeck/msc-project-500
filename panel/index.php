@@ -7,25 +7,25 @@
       <title> COCACOLA BUSINESS INTELLIGENCE - Control Panel </title>
       
       <!-- Favicon -->
-      <!-- <link rel="shortcut icon" href="../assets/images/favicon.ico"> -->
+      <!-- <link rel="shortcut icon" href="./assets/images/favicon.ico"> -->
       
       <!-- Library / Plugin Css Build -->
-      <link rel="stylesheet" href="../assets/css/core/libs.min.css">
+      <link rel="stylesheet" href="./assets/css/core/libs.min.css">
       
       <!-- Aos Animation Css -->
-      <link rel="stylesheet" href="../assets/vendor/aos/dist/aos.css">
+      <link rel="stylesheet" href="./assets/vendor/aos/dist/aos.css">
       
       <!-- Hope Ui Design System Css -->
-      <link rel="stylesheet" href="../assets/css/hope-ui.min.css?v=5.0.0">
+      <link rel="stylesheet" href="./assets/css/hope-ui.min.css?v=5.0.0">
       
       <!-- Custom Css -->
-      <link rel="stylesheet" href="../assets/css/custom.min.css?v=5.0.0">
+      <link rel="stylesheet" href="./assets/css/custom.min.css?v=5.0.0">
       
       <!-- Customizer Css -->
-      <link rel="stylesheet" href="../assets/css/customizer.min.css?v=5.0.0">
+      <link rel="stylesheet" href="./assets/css/customizer.min.css?v=5.0.0">
       
       <!-- RTL Css -->
-      <link rel="stylesheet" href="../assets/css/rtl.min.css?v=5.0.0">
+      <link rel="stylesheet" href="./assets/css/rtl.min.css?v=5.0.0">
       
       
   </head>
@@ -259,7 +259,7 @@
         <!--Nav Start-->
         <nav class="nav navbar navbar-expand-xl navbar-light iq-navbar">
           <div class="container-fluid navbar-inner">
-            <a href="../dashboard/index.html" class="navbar-brand">
+            <a href="./dashboard/index.html" class="navbar-brand">
                 
                 <!--Logo start-->
                 <!-- <div class="logo-main">
@@ -319,11 +319,11 @@
                         <div class="m-0 border-0 shadow-none rounded card">
                             <div class="p-0 ">
                                 <ul class="p-0 list-group list-group-flush">
-                                    <li class="iq-sub-card list-group-item"><a class="p-0 d-flex justify-content-start d-flex align-items-center" href="#"><img src="../assets/images/Flag/flag-03.png" alt="img-flaf" class="img-fluid me-2" style="width: 15px;height: 15px;min-width: 15px;"/>Spanish</a></li>
-                                    <li class="iq-sub-card list-group-item"><a class="p-0 d-flex justify-content-start d-flex align-items-center" href="#"><img src="../assets/images/Flag/flag-04.png" alt="img-flaf" class="img-fluid me-2" style="width: 15px;height: 15px;min-width: 15px;"/>Italian</a></li>
-                                    <li class="iq-sub-card list-group-item"><a class="p-0 d-flex justify-content-start d-flex align-items-center" href="#"><img src="../assets/images/Flag/flag-02.png" alt="img-flaf" class="img-fluid me-2" style="width: 15px;height: 15px;min-width: 15px;"/>French</a></li>
-                                    <li class="iq-sub-card list-group-item"><a class="p-0 d-flex justify-content-start d-flex align-items-center" href="#"><img src="../assets/images/Flag/flag-05.png" alt="img-flaf" class="img-fluid me-2" style="width: 15px;height: 15px;min-width: 15px;"/>German</a></li>
-                                    <li class="iq-sub-card list-group-item"><a class="p-0 d-flex justify-content-start d-flex align-items-center" href="#"><img src="../assets/images/Flag/flag-06.png" alt="img-flaf" class="img-fluid me-2" style="width: 15px;height: 15px;min-width: 15px;"/>Japanese</a></li>
+                                    <li class="iq-sub-card list-group-item"><a class="p-0 d-flex justify-content-start d-flex align-items-center" href="#"><img src="./assets/images/Flag/flag-03.png" alt="img-flaf" class="img-fluid me-2" style="width: 15px;height: 15px;min-width: 15px;"/>Spanish</a></li>
+                                    <li class="iq-sub-card list-group-item"><a class="p-0 d-flex justify-content-start d-flex align-items-center" href="#"><img src="./assets/images/Flag/flag-04.png" alt="img-flaf" class="img-fluid me-2" style="width: 15px;height: 15px;min-width: 15px;"/>Italian</a></li>
+                                    <li class="iq-sub-card list-group-item"><a class="p-0 d-flex justify-content-start d-flex align-items-center" href="#"><img src="./assets/images/Flag/flag-02.png" alt="img-flaf" class="img-fluid me-2" style="width: 15px;height: 15px;min-width: 15px;"/>French</a></li>
+                                    <li class="iq-sub-card list-group-item"><a class="p-0 d-flex justify-content-start d-flex align-items-center" href="#"><img src="./assets/images/Flag/flag-05.png" alt="img-flaf" class="img-fluid me-2" style="width: 15px;height: 15px;min-width: 15px;"/>German</a></li>
+                                    <li class="iq-sub-card list-group-item"><a class="p-0 d-flex justify-content-start d-flex align-items-center" href="#"><img src="./assets/images/Flag/flag-06.png" alt="img-flaf" class="img-fluid me-2" style="width: 15px;height: 15px;min-width: 15px;"/>Japanese</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -347,7 +347,7 @@
                         <div class="p-0 card-body">
                             <a href="#" class="iq-sub-card">
                               <div class="d-flex align-items-center">
-                                  <img class="p-1 avatar-40 rounded-pill bg-primary-subtle" src="../assets/images/shapes/01.png" alt="">
+                                  <img class="p-1 avatar-40 rounded-pill bg-primary-subtle" src="./assets/images/shapes/01.png" alt="">
                                   <div class="ms-3 w-100">
                                     <h6 class="mb-0 text-start iq-text">Emma Watson Bni</h6>
                                     <div class="d-flex justify-content-between align-items-center">
@@ -360,7 +360,7 @@
                             <a href="#" class="iq-sub-card">
                               <div class="d-flex align-items-center">
                                   <div class="">
-                                    <img class="p-1 avatar-40 rounded-pill bg-primary-subtle" src="../assets/images/shapes/02.png" alt="">
+                                    <img class="p-1 avatar-40 rounded-pill bg-primary-subtle" src="./assets/images/shapes/02.png" alt="">
                                   </div>
                                   <div class="ms-3 w-100">
                                     <h6 class="mb-0 text-start  iq-text">New customer is join</h6>
@@ -373,7 +373,7 @@
                             </a>
                             <a href="#" class="iq-sub-card">
                               <div class="d-flex align-items-center">
-                                  <img class="p-1 avatar-40 rounded-pill bg-primary-subtle" src="../assets/images/shapes/03.png" alt="">
+                                  <img class="p-1 avatar-40 rounded-pill bg-primary-subtle" src="./assets/images/shapes/03.png" alt="">
                                   <div class="ms-3 w-100">
                                     <h6 class="mb-0 text-start iq-text">Two customer is left</h6>
                                     <div class="d-flex justify-content-between align-items-center">
@@ -385,7 +385,7 @@
                             </a>
                             <a href="#" class="iq-sub-card">
                               <div class="d-flex align-items-center">
-                                  <img class="p-1 avatar-40 rounded-pill bg-primary-subtle" src="../assets/images/shapes/04.png" alt="">
+                                  <img class="p-1 avatar-40 rounded-pill bg-primary-subtle" src="./assets/images/shapes/04.png" alt="">
                                   <div class="w-100 ms-3">
                                     <h6 class="mb-0 text-start  iq-text">New Mail from Fenny</h6>
                                     <div class="d-flex justify-content-between align-items-center">
@@ -402,12 +402,12 @@
                
                 <li class="nav-item dropdown custom-drop">
                   <a class="py-0 nav-link d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="../assets/images/avatars/01.png" alt="User-Profile" class="theme-color-default-img img-fluid avatar avatar-50 avatar-rounded">
-                    <img src="../assets/images/avatars/avtar_1.png" alt="User-Profile" class="theme-color-purple-img img-fluid avatar avatar-50 avatar-rounded">
-                    <img src="../assets/images/avatars/avtar_2.png" alt="User-Profile" class="theme-color-blue-img img-fluid avatar avatar-50 avatar-rounded">
-                    <img src="../assets/images/avatars/avtar_4.png" alt="User-Profile" class="theme-color-green-img img-fluid avatar avatar-50 avatar-rounded">
-                    <img src="../assets/images/avatars/avtar_5.png" alt="User-Profile" class="theme-color-yellow-img img-fluid avatar avatar-50 avatar-rounded">
-                    <img src="../assets/images/avatars/avtar_3.png" alt="User-Profile" class="theme-color-pink-img img-fluid avatar avatar-50 avatar-rounded">
+                    <img src="./assets/images/avatars/01.png" alt="User-Profile" class="theme-color-default-img img-fluid avatar avatar-50 avatar-rounded">
+                    <img src="./assets/images/avatars/avtar_1.png" alt="User-Profile" class="theme-color-purple-img img-fluid avatar avatar-50 avatar-rounded">
+                    <img src="./assets/images/avatars/avtar_2.png" alt="User-Profile" class="theme-color-blue-img img-fluid avatar avatar-50 avatar-rounded">
+                    <img src="./assets/images/avatars/avtar_4.png" alt="User-Profile" class="theme-color-green-img img-fluid avatar avatar-50 avatar-rounded">
+                    <img src="./assets/images/avatars/avtar_5.png" alt="User-Profile" class="theme-color-yellow-img img-fluid avatar avatar-50 avatar-rounded">
+                    <img src="./assets/images/avatars/avtar_3.png" alt="User-Profile" class="theme-color-pink-img img-fluid avatar avatar-50 avatar-rounded">
                     <div class="caption ms-3 d-none d-md-block ">
                         <h6 class="mb-0 caption-title">Dammiewelbeck</h6>
                         <p class="mb-0 caption-sub-title">Marketing Administrator</p>
@@ -438,12 +438,12 @@
                   </div>
               </div>
               <div class="iq-header-img">
-                  <img src="../assets/images/dashboard/top-header.png" alt="header" class="theme-color-default-img img-fluid w-100 h-100 animated-scaleX">
-                  <img src="../assets/images/dashboard/top-header1.png" alt="header" class="theme-color-purple-img img-fluid w-100 h-100 animated-scaleX">
-                  <img src="../assets/images/dashboard/top-header2.png" alt="header" class="theme-color-blue-img img-fluid w-100 h-100 animated-scaleX">
-                  <img src="../assets/images/dashboard/top-header3.png" alt="header" class="theme-color-green-img img-fluid w-100 h-100 animated-scaleX">
-                  <img src="../assets/images/dashboard/top-header4.png" alt="header" class="theme-color-yellow-img img-fluid w-100 h-100 animated-scaleX">
-                  <img src="../assets/images/dashboard/top-header5.png" alt="header" class="theme-color-pink-img img-fluid w-100 h-100 animated-scaleX">
+                  <img src="./assets/images/dashboard/top-header.png" alt="header" class="theme-color-default-img img-fluid w-100 h-100 animated-scaleX">
+                  <img src="./assets/images/dashboard/top-header1.png" alt="header" class="theme-color-purple-img img-fluid w-100 h-100 animated-scaleX">
+                  <img src="./assets/images/dashboard/top-header2.png" alt="header" class="theme-color-blue-img img-fluid w-100 h-100 animated-scaleX">
+                  <img src="./assets/images/dashboard/top-header3.png" alt="header" class="theme-color-green-img img-fluid w-100 h-100 animated-scaleX">
+                  <img src="./assets/images/dashboard/top-header4.png" alt="header" class="theme-color-yellow-img img-fluid w-100 h-100 animated-scaleX">
+                  <img src="./assets/images/dashboard/top-header5.png" alt="header" class="theme-color-pink-img img-fluid w-100 h-100 animated-scaleX">
               </div>
           </div>          <!-- Nav Header Component End -->
         <!--Nav End-->
@@ -725,7 +725,7 @@
                            <tr>
                               <td>
                                  <div class="d-flex align-items-center">
-                                    <img class="rounded bg-primary-subtle img-fluid avatar-40 me-3" src="../assets/images/shapes/01.png" alt="profile">
+                                    <img class="rounded bg-primary-subtle img-fluid avatar-40 me-3" src="./assets/images/shapes/01.png" alt="profile">
                                     <h6>Addidis Sportwear</h6>
                                  </div>
                               </td>
@@ -755,7 +755,7 @@
                            <tr>
                               <td>
                                  <div class="d-flex align-items-center">
-                                    <img class="rounded bg-primary-subtle img-fluid avatar-40 me-3" src="../assets/images/shapes/05.png" alt="profile">
+                                    <img class="rounded bg-primary-subtle img-fluid avatar-40 me-3" src="./assets/images/shapes/05.png" alt="profile">
                                     <h6>Netflixer Platforms</h6>
                                  </div>
                               </td>
@@ -782,7 +782,7 @@
                            <tr>
                               <td>
                                  <div class="d-flex align-items-center">
-                                    <img class="rounded bg-primary-subtle img-fluid avatar-40 me-3" src="../assets/images/shapes/02.png" alt="profile">
+                                    <img class="rounded bg-primary-subtle img-fluid avatar-40 me-3" src="./assets/images/shapes/02.png" alt="profile">
                                     <h6>Shopifi Stores</h6>
                                  </div>
                               </td>
@@ -809,7 +809,7 @@
                            <tr>
                               <td>
                                  <div class="d-flex align-items-center">
-                                    <img class="rounded bg-primary-subtle img-fluid avatar-40 me-3" src="../assets/images/shapes/03.png" alt="profile">
+                                    <img class="rounded bg-primary-subtle img-fluid avatar-40 me-3" src="./assets/images/shapes/03.png" alt="profile">
                                     <h6>Bootstrap Technologies</h6>
                                  </div>
                               </td>
@@ -842,7 +842,7 @@
                            <tr>
                               <td>
                                  <div class="d-flex align-items-center">
-                                    <img class="rounded bg-primary-subtle img-fluid avatar-40 me-3" src="../assets/images/shapes/04.png" alt="profile">
+                                    <img class="rounded bg-primary-subtle img-fluid avatar-40 me-3" src="./assets/images/shapes/04.png" alt="profile">
                                     <h6>Community First</h6>
                                  </div>
                               </td>
@@ -899,35 +899,35 @@
     <!-- Wrapper End-->
 
     <!-- Library Bundle Script -->
-    <script src="../assets/js/core/libs.min.js"></script>
+    <script src="./assets/js/core/libs.min.js"></script>
     
     <!-- External Library Bundle Script -->
-    <script src="../assets/js/core/external.min.js"></script>
+    <script src="./assets/js/core/external.min.js"></script>
     
     <!-- Widgetchart Script -->
-    <script src="../assets/js/charts/widgetcharts.js"></script>
+    <script src="./assets/js/charts/widgetcharts.js"></script>
     
     <!-- mapchart Script -->
-    <script src="../assets/js/charts/vectore-chart.js"></script>
-    <script src="../assets/js/charts/dashboard.js" ></script>
+    <script src="./assets/js/charts/vectore-chart.js"></script>
+    <script src="./assets/js/charts/dashboard.js" ></script>
     
     <!-- fslightbox Script -->
-    <script src="../assets/js/plugins/fslightbox.js"></script>
+    <script src="./assets/js/plugins/fslightbox.js"></script>
     
     <!-- Settings Script -->
-    <script src="../assets/js/plugins/setting.js"></script>
+    <script src="./assets/js/plugins/setting.js"></script>
     
     <!-- Slider-tab Script -->
-    <script src="../assets/js/plugins/slider-tabs.js"></script>
+    <script src="./assets/js/plugins/slider-tabs.js"></script>
     
     <!-- Form Wizard Script -->
-    <script src="../assets/js/plugins/form-wizard.js"></script>
+    <script src="./assets/js/plugins/form-wizard.js"></script>
     
     <!-- AOS Animation Plugin-->
-    <script src="../assets/vendor/aos/dist/aos.js"></script>
+    <script src="./assets/vendor/aos/dist/aos.js"></script>
     
     <!-- App Script -->
-    <script src="../assets/js/hope-ui.js" defer></script>
+    <script src="./assets/js/hope-ui.js" defer></script>
     
     
   </body>
