@@ -9,7 +9,7 @@
       <title> COCACOLA BUSINESS INTELLIGENCE - Control Panel </title>
       
       <!-- Favicon -->
-      <link rel="shortcut icon" href="../../assets/images/favicon.ico">
+      <!-- <link rel="shortcut icon" href="../../assets/images/favicon.ico"> -->
       
       <!-- Library / Plugin Css Build -->
       <link rel="stylesheet" href="../../assets/css/core/libs.min.css">
@@ -31,11 +31,11 @@
   </head>
   <body class=" " data-bs-spy="scroll" data-bs-target="#elements-section" data-bs-offset="0" tabindex="0">
     <!-- loader Start -->
-    <div id="loading">
+    <!-- <div id="loading">
       <div class="loader simple-loader">
           <div class="loader-body">
           </div>
-      </div>    </div>
+      </div>    </div> -->
     <!-- loader END -->
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" data-bs-scroll="true" data-bs-backdrop="true"
       aria-labelledby="offcanvasExampleLabel">
