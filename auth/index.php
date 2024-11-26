@@ -301,7 +301,7 @@
                   <div class="col-md-10">
                      <div class="card card-transparent shadow-none d-flex justify-content-center mb-0 auth-card">
                         <div class="card-body z-3 px-md-0 px-lg-4">
-                           <a href="/" class="navbar-brand d-flex align-items-center mb-3">
+                           <a href="../" class="navbar-brand d-flex align-items-center mb-3">
                               
                               <!--Logo start-->
                               <!-- <div class="logo-main">
@@ -331,7 +331,7 @@
                            </a>
                            <h2 class="mb-2 text-center">Sign In</h2>
                            <p class="text-center">Login to stay connected.</p>
-                           <form action="/panel">
+                           <form action="../panel">
                               <div class="row">
                                  <div class="col-lg-12">
                                     <div class="form-group">
