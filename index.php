@@ -43,7 +43,7 @@
                     Streamline your operations and gain actionable insights with our advanced management dashboard. 
                     Monitor sales, analyze data, and optimize campaigns in one seamless interface.
                 </p>
-                <a href="/auth" class="btn btn-primary btn-lg btn-get-started">
+                <a href="./auth" class="btn btn-primary btn-lg btn-get-started">
                     Get Started
                 </a>
             </div>
