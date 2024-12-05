@@ -1,4 +1,44 @@
+<?php
+session_start();
 
+    if (isset($_GET['func']) && $_GET['func'] === 'logout') {
+      // Unset all session variables
+      session_unset();
+      session_destroy();
+      header("Location: index.php");
+      exit();
+    }
+
+    if (isset($_SESSION["id"]) && $_SESSION["id"] != "") {
+        header("Location: ../panel/index.php");
+        exit();
+    } else {
+
+        include ('config.php');
+
+        if(isset($_POST['submit'])){
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+
+            $confirm = mysqli_query($database, "SELECT * FROM `users` WHERE (`email` = '$email') AND (`password` = '$password') ");
+            $user = mysqli_fetch_array($confirm);
+
+            if($user > 0){
+                $_SESSION['id'] = $user['id'];
+                $_SESSION['role'] = $user['role'];
+                $extra = '../panel/index.php';
+                $host = $_SERVER['HTTP_HOST'];
+                $uri = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
+                $link = "http://$host$uri/$extra";
+                echo "<script>window.location.href='".$link."'</script>";
+            }else{
+                echo "<script>alert('Invalid login credentials. Please try again.'); window.location.href='" . $_SERVER['PHP_SELF'] . "'; </script>";
+            }
+        }
+    }
+
+
+?>
 
 
 <!doctype html>
@@ -293,7 +333,8 @@
       </div>
     </div>
     
-      <div class="wrapper">
+    <!-- Login Page -->
+    <div class="wrapper">
       <section class="login-content">
          <div class="row m-0 align-items-center bg-white vh-100">            
             <div class="col-md-6">
@@ -301,7 +342,7 @@
                   <div class="col-md-10">
                      <div class="card card-transparent shadow-none d-flex justify-content-center mb-0 auth-card">
                         <div class="card-body z-3 px-md-0 px-lg-4">
-                           <a href="../" class="navbar-brand d-flex align-items-center mb-3">
+                           <a href="../" class="navbar-brand">
                               
                               <!--Logo start-->
                               <!-- <div class="logo-main">
@@ -327,22 +368,22 @@
                               
                               
                               
-                              <h4 class="logo-title ms-3 text-bold">Cocoal Business Intelligence Panel</h4>
+                              <h2 class="logo-title text-primary text-center my-5 text-bold">Coca-Cola<br>Business Intelligence<br>Control Panel</h2>
                            </a>
                            <h2 class="mb-2 text-center">Sign In</h2>
                            <p class="text-center">Login to stay connected.</p>
-                           <form action="../panel">
+                           <form action="" method="POST">
                               <div class="row">
                                  <div class="col-lg-12">
                                     <div class="form-group">
                                        <label for="email" class="form-label">Email</label>
-                                       <input type="email" class="form-control" id="email" aria-describedby="email" placeholder=" " required>
+                                       <input type="email" class="form-control" name="email" id="email" aria-describedby="email" placeholder=" " required>
                                     </div>
                                  </div>
                                  <div class="col-lg-12">
                                     <div class="form-group">
                                        <label for="password" class="form-label">Password</label>
-                                       <input type="password" class="form-control" id="password" aria-describedby="password" placeholder=" " required>
+                                       <input type="password" class="form-control" name="password" id="password" aria-describedby="password" placeholder=" " required>
                                     </div>
                                  </div>
                                  <div class="col-lg-12 d-flex justify-content-between">
@@ -354,7 +395,7 @@
                                  </div>
                               </div>
                               <div class="d-flex justify-content-center">
-                                 <button type="submit" class="btn btn-primary">Sign In</button>
+                                 <button type="submit" name="submit" class="btn btn-primary">Sign In</button>
                               </div>
 
                            </form>
@@ -378,7 +419,8 @@
             </div>
          </div>
       </section>
-      </div>
+    </div>
+
     <!-- Library Bundle Script -->
     <script src="../assets/js/core/libs.min.js"></script>
     
