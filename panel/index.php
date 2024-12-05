@@ -2,21 +2,61 @@
 include('header.php');
 include('sidebar.php');
 include('navbar.php');
+
+   // Fetch reports with detailed joins and aggregated data
+   $reportsQuery = mysqli_query($database, "
+       SELECT 
+           r.id AS report_id,
+           u.first_name AS owner_first_name,
+           u.last_name AS owner_last_name,
+           u.image AS owner_image,
+           reg.name AS region_name,
+           sr.frequency,
+           sr.created_at,
+           (
+               SELECT GROUP_CONCAT(DISTINCT CONCAT_WS('|', p.image, p.name) SEPARATOR ',') 
+               FROM sales_report_items sri
+               JOIN products p ON sri.product_id = p.id
+               WHERE sri.sales_report_id = sr.id
+           ) AS product_images_with_names,
+           (
+               SELECT SUM(sri.quantity) 
+               FROM sales_report_items sri
+               WHERE sri.sales_report_id = sr.id
+           ) AS total_quantity,
+           (
+               SELECT SUM(sri.revenue) 
+               FROM sales_report_items sri
+               WHERE sri.sales_report_id = sr.id
+           ) AS total_revenue
+       FROM reports r
+       JOIN users u ON r.user_id = u.id
+       JOIN sales_reports sr ON r.id = sr.report_id
+       JOIN regions reg ON sr.region_id = reg.id
+       WHERE r.report_type = 'sales'
+       ORDER BY r.created_at DESC
+   ");
+   
+   // Fetch data into an array
+   $reports = [];
+   while ($row = mysqli_fetch_assoc($reportsQuery)) {
+       $reports[] = $row;
+   }
 ?>
    
    <!-- Nav Header Component Start -->
       <div class="iq-navbar-header" style="height: 215px;">
          <div class="container-fluid iq-container">
             <div class="row">
-                  <div class="col-md-12">
-                     <div class="flex-wrap d-flex justify-content-between align-items-center">
-                        <div>
-                              <h1>COCACOLA BUSINESS INTELLIGENCE PANEL</h1>
+               <div class="col-md-12">
+                  <div class="flex-wrap d-flex justify-content-between align-items-center">
+                     <div>
+                        <h1>COCACOLA BUSINESS INTELLIGENCE PANEL</h1>
                         <p>Welcome to the Coca-Cola Business Intelligence Panel. Our mission is to empower businesses by providing tools and resources for accurate sales prediction and data-driven decision making.</p>
-                        </div>
-                     
                      </div>
+                  
                   </div>
+               </div>
             </div>
          </div>
          <div class="iq-header-img">
@@ -195,7 +235,8 @@ include('navbar.php');
                   </div>
                </div>
             </div>
-            <div class="col-md-8">
+            <!-- remove -->
+            <!-- <div class="col-md-8">
                <div class="card" data-aos="fade-up" data-aos-delay="900">
                   <div class="flex-wrap card-header d-flex justify-content-between">
                      <div class="header-title">
@@ -242,9 +283,10 @@ include('navbar.php');
                      </div>
                   </div>
                </div>
-            </div>
+            </div> -->
 
-            <div class="col-md-4">
+            <!-- remove -->
+            <!-- <div class="col-md-4">
                <div class="col-md-12">
                   <div class="card" data-aos="fade-up" data-aos-delay="1000">
                      <div class="flex-wrap card-header d-flex justify-content-between">
@@ -267,15 +309,99 @@ include('navbar.php');
                      </div>
                   </div>
                </div>  
-            </div>   
+            </div>    -->
          </div>
       </div>
    </div>
 
-   <!-- DATATABLE -->
+   <!-- SALES DATATABLE -->
+   <div class="row">
+      <div class="col-sm-12">
+         <div class="card" data-aos="fade-up" data-aos-delay="800">
+               <div class="card-header d-flex justify-content-between">
+                  <div class="header-title">
+                     <h4 class="card-title">Sales Reports</h4>
+                  </div>
+               </div>
+               <div class="card-body">
+                  <div class="custom-datatable-entries">
+                     <table id="datatable" class="table table-striped" data-toggle="data-table">
+                           <thead>
+                              <tr>
+                                 <th>S/N</th>
+                                 <th>Owner</th>
+                                 <th>Region</th>
+                                 <th>Frequency</th>
+                                 <th>Products</th>
+                                 <th>Quantity</th>
+                                 <th>Revenue</th>
+                                 <th>Created On</th>
+                                 <th>Actions</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              <?php $id = 1; foreach ($reports as $report) { ?>
+                              <tr>
+                                 <td><?= $id++; ?></td>
+                                 <td>
+                                       <div class="d-flex align-items-center">
+                                          <img src="../assets/images/users/<?= htmlspecialchars($report['owner_image']); ?>" 
+                                             alt="Owner Image" 
+                                             class="rounded-circle" 
+                                             style="width: 40px; height: 40px; object-fit: cover;">
+                                          <span class="ms-2"><?= htmlspecialchars($report['owner_first_name'] . ' ' . $report['owner_last_name']); ?></span>
+                                       </div>
+                                 </td>
+                                 <td><?= htmlspecialchars($report['region_name']); ?></td>
+                                 <td><?= htmlspecialchars($report['frequency']); ?></td>
+                                 <td>
+                                       <div class="iq-media-group iq-media-group-1">
+                                          <?php $productImages = explode(',', $report['product_images_with_names']);
+                                          foreach ($productImages as $productData) { 
+                                             list($image, $name) = explode('|', $productData); 
+                                          ?>
+                                          <a href="" class="iq-media-1" data-bs-toggle="tooltip" data-bs-placement="top" title="<?= htmlspecialchars($name); ?>">
+                                             <div class="icon iq-icon-box-3 rounded-pill">
+                                                   <img src="../assets/images/products/<?= htmlspecialchars($image); ?>" alt="<?= htmlspecialchars($name); ?>" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;">
+                                             </div>
+                                          </a>
+                                          <?php } ?>
+                                       </div>
+                                 </td>
+                                 <td><?= number_format($report['total_quantity']); ?></td>
+                                 <td>$<?= number_format($report['total_revenue'], 2); ?></td>
+                                 <td><?= (new DateTime($report['created_at']))->format('Y-m-d'); ?></td>
+                                 <td>
+                                       <a href="../reports/view_report.php?id=<?= $report['report_id']; ?>" class="btn btn-sm btn-primary">View</a>
+                                       <!-- <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="<?php //echo $report['report_id']; ?>">Delete</button> -->
+                                 </td>
+                              </tr>
+                              <?php } ?>
+                           </tbody>
+                           <tfoot>
+                              <tr>
+                                 <th>S/N</th>
+                                 <th>Owner</th>
+                                 <th>Region</th>
+                                 <th>Frequency</th>
+                                 <th>Products</th>
+                                 <th>Quantity</th>
+                                 <th>Revenue</th>
+                                 <th>Created On</th>
+                                 <th>Actions</th>
+                              </tr>
+                           </tfoot>
+                     </table>
+                  </div>
+               </div>
+         </div>
+      </div>
+   </div>
+
+   <!-- COMPETITORS DATATABLE -->
    <div class="row">
       <div class="col-12">
-            <div class="card">
+            <div class="card" data-aos="fade-up" data-aos-delay="800">
                <div class="card-header d-flex justify-content-between">
                   <div class="header-title">
                         <h4 class="card-title">Competitors</h4>

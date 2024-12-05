@@ -13,25 +13,36 @@ session_start();
         header("Location: ../panel/index.php");
         exit();
     } else {
-
         include ('config.php');
 
-        if(isset($_POST['submit'])){
+        if (isset($_POST['submit'])) {
             $email = $_POST['email'];
             $password = $_POST['password'];
-
-            $confirm = mysqli_query($database, "SELECT * FROM `users` WHERE (`email` = '$email') AND (`password` = '$password') ");
-            $user = mysqli_fetch_array($confirm);
-
-            if($user > 0){
-                $_SESSION['id'] = $user['id'];
-                $_SESSION['role'] = $user['role'];
-                $extra = '../panel/index.php';
-                $host = $_SERVER['HTTP_HOST'];
-                $uri = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-                $link = "http://$host$uri/$extra";
-                echo "<script>window.location.href='".$link."'</script>";
-            }else{
+        
+            // Fetch the user's hashed password from the database
+            $query = "SELECT * FROM `users` WHERE `email` = ?";
+            $stmt = $database->prepare($query); // Use prepared statements to prevent SQL injection
+            $stmt->bind_param('s', $email); // Bind the email parameter
+            $stmt->execute();
+            $result = $stmt->get_result();
+        
+            if ($result->num_rows > 0) {
+                $user = $result->fetch_assoc();
+                
+                // Verify the provided password with the stored hashed password
+                if (password_verify($password, $user['password'])) {
+                    // Set session variables on successful login
+                    $_SESSION['id'] = $user['id'];
+                    $_SESSION['role'] = $user['role'];
+                    $extra = '../panel/index.php';
+                    $host = $_SERVER['HTTP_HOST'];
+                    $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+                    $link = "http://$host$uri/$extra";
+                    echo "<script>window.location.href='" . $link . "'</script>";
+                } else {
+                    echo "<script>alert('Invalid login credentials. Please try again.'); window.location.href='" . $_SERVER['PHP_SELF'] . "'; </script>";
+                }
+            } else {
                 echo "<script>alert('Invalid login credentials. Please try again.'); window.location.href='" . $_SERVER['PHP_SELF'] . "'; </script>";
             }
         }

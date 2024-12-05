@@ -257,6 +257,9 @@
                                     <label for="about" class="form-label">Short About:</label>
                                     <textarea class="form-control" id="about" name="about" rows="3"><?= htmlspecialchars($user['about']); ?></textarea>
                                 </div>
+                                <div class="header-title my-3">
+                                    <h4 class="card-title">Reset Password (Optional)</h4>
+                                </div>
                                 <div class="form-group col-md-6">
                                     <label class="form-label" for="pass">Password:</label>
                                     <input type="password" class="form-control" id="pass" name="pass" placeholder="Password">

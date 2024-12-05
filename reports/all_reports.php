@@ -22,19 +22,86 @@
         }
     }
 
-    $reports = mysqli_query($database, "SELECT * FROM `reports` ORDER BY `id` DESC ");
+    // $reports = mysqli_query($database, "SELECT * FROM `reports` ORDER BY `id` DESC ");
+
+    // Fetch reports with detailed joins and aggregated data
+    $reportsQuery = mysqli_query($database, "
+        SELECT 
+            r.id AS report_id,
+            u.first_name AS owner_first_name,
+            u.last_name AS owner_last_name,
+            u.image AS owner_image,
+            reg.name AS region_name,
+            sr.frequency,
+            sr.created_at,
+            (
+                SELECT GROUP_CONCAT(DISTINCT CONCAT_WS('|', p.image, p.name) SEPARATOR ',') 
+                FROM sales_report_items sri
+                JOIN products p ON sri.product_id = p.id
+                WHERE sri.sales_report_id = sr.id
+            ) AS product_images_with_names,
+            (
+                SELECT SUM(sri.quantity) 
+                FROM sales_report_items sri
+                WHERE sri.sales_report_id = sr.id
+            ) AS total_quantity,
+            (
+                SELECT SUM(sri.revenue) 
+                FROM sales_report_items sri
+                WHERE sri.sales_report_id = sr.id
+            ) AS total_revenue
+        FROM reports r
+        JOIN users u ON r.user_id = u.id
+        JOIN sales_reports sr ON r.id = sr.report_id
+        JOIN regions reg ON sr.region_id = reg.id
+        WHERE r.report_type = 'sales'
+        ORDER BY r.created_at DESC
+    ");
+    
+    // Fetch data into an array
+    $reports = [];
+    while ($row = mysqli_fetch_assoc($reportsQuery)) {
+        $reports[] = $row;
+    }
+    
+
+
 
 
 ?>
 
 
     <div class="iq-navbar-header" style="height: 215px;">
-        <?php if(isset($_SESSION['success'])) { ?>
-            <div class="alert alert-left alert-success alert-dismissible fade show mb-3" role="alert">
-                <span><b>Weldone!</b> <?= ($_SESSION['success']) ?></span>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+        <!-- Success Alert -->
+        <?php if (isset($_SESSION['success'])) { ?>
+            <div class="alert alert-success alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3" 
+                role="alert" style="z-index: 1050; width: 80%; max-width: 1000px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+                <span><b>Success!</b> <?= htmlspecialchars($_SESSION['success']); ?></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
+            <script>
+                // Auto-dismiss the alert after 5 seconds
+                setTimeout(() => {
+                    const alert = document.querySelector('.alert');
+                    if (alert) alert.classList.remove('show');
+                }, 5000);
+            </script>
         <?php unset($_SESSION['success']); } ?>
+        <!-- Error Alert -->
+        <?php if (isset($_SESSION['error'])) { ?>
+            <div class="alert alert-danger alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3" 
+                role="alert" style="z-index: 1050; width: 80%; max-width: 1000px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+                <span><b>Error:</b> <?= htmlspecialchars($_SESSION['error']); ?></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <script>
+                // Auto-dismiss the alert after 3 seconds
+                setTimeout(() => {
+                    const alert = document.querySelector('.alert');
+                    if (alert) alert.classList.remove('show');
+                }, 3000);
+            </script>
+        <?php unset($_SESSION['error']); } ?>
         <div class="container-fluid iq-container">
             <div class="row">
                 <div class="col-md-12">
@@ -73,7 +140,7 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <div class="header-title">
-                        <h4 class="card-title">View Custom Reports</h4>
+                        <h4 class="card-title">View Sales Reports</h4>
                     </div>
                 </div>
                 <div class="card-body">
@@ -82,9 +149,12 @@
                             <thead>
                                 <tr>
                                     <th>S/N</th>
-                                    <th>Report ID</th>
-                                    <th>Report Name</th>
-                                    <th>Type</th>
+                                    <th>Owner</th>
+                                    <th>Region</th>
+                                    <th>Frequency</th>
+                                    <th>Products</th>
+                                    <th>Quantity</th>
+                                    <th>Revenue</th>
                                     <th>Created On</th>
                                     <th>Actions</th>
                                 </tr>
@@ -93,45 +163,50 @@
                                 <?php $id = 1; foreach ($reports as $report) { ?>
                                 <tr>
                                     <td><?= $id++; ?></td>
-                                    <td><?= $report['id']; ?></td>
-                                    <td><?= htmlspecialchars($report['name']); ?></td>
-                                    <td><?= $report['type']; ?></td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <img src="../assets/images/users/<?= htmlspecialchars($report['owner_image']); ?>" 
+                                                alt="Owner Image" 
+                                                class="rounded-circle" 
+                                                style="width: 40px; height: 40px; object-fit: cover;">
+                                            <span class="ms-2"><?= htmlspecialchars($report['owner_first_name'] . ' ' . $report['owner_last_name']); ?></span>
+                                        </div>
+                                    </td>
+                                    <td><?= htmlspecialchars($report['region_name']); ?></td>
+                                    <td><?= htmlspecialchars($report['frequency']); ?></td>
+                                    <td>
+                                        <div class="iq-media-group iq-media-group-1">
+                                            <?php $productImages = explode(',', $report['product_images_with_names']);
+                                            foreach ($productImages as $productData) { 
+                                                list($image, $name) = explode('|', $productData); 
+                                            ?>
+                                            <a href="" class="iq-media-1" data-bs-toggle="tooltip" data-bs-placement="top" title="<?= htmlspecialchars($name); ?>">
+                                                <div class="icon iq-icon-box-3 rounded-pill">
+                                                    <img src="../assets/images/products/<?= htmlspecialchars($image); ?>" alt="<?= htmlspecialchars($name); ?>" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;">
+                                                </div>
+                                            </a>
+                                            <?php } ?>
+                                        </div>
+                                    </td>
+                                    <td><?= number_format($report['total_quantity']); ?></td>
+                                    <td>$<?= number_format($report['total_revenue'], 2); ?></td>
                                     <td><?= (new DateTime($report['created_at']))->format('Y-m-d'); ?></td>
                                     <td>
-                                        <a href="view_report.php?id=<?= $report['id'] ?>" class="btn btn-sm btn-primary">View</a>
-                                        <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="<?= $report['id'] ?>">Delete</button>
+                                        <a href="view_report.php?id=<?= $report['report_id']; ?>" class="btn btn-sm btn-primary">View</a>
+                                        <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="<?= $report['report_id']; ?>">Delete</button>
                                     </td>
                                 </tr>
                                 <?php } ?>
-                                <tr>
-                                    <td>111</td>
-                                    <td>001</td>
-                                    <td>Sales Report Q1</td>
-                                    <td>Sales</td>
-                                    <td>2024-11-01</td>
-                                    <td>
-                                        <a href="view_report.php?id=001" class="btn btn-sm btn-primary">View</a>
-                                        <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="001">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>111</td>
-                                    <td>002</td>
-                                    <td>Customer Insights Q1</td>
-                                    <td>Customer Insights</td>
-                                    <td>2024-11-02</td>
-                                    <td>
-                                        <a href="view_report.php?id=002" class="btn btn-sm btn-primary">View</a>
-                                        <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="002">Delete</button>
-                                    </td>
-                                </tr>
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <th>S/N</th>
-                                    <th>Report ID</th>
-                                    <th>Report Name</th>
-                                    <th>Type</th>
+                                    <th>Owner</th>
+                                    <th>Region</th>
+                                    <th>Frequency</th>
+                                    <th>Products</th>
+                                    <th>Quantity</th>
+                                    <th>Revenue</th>
                                     <th>Created On</th>
                                     <th>Actions</th>
                                 </tr>
@@ -178,7 +253,7 @@
         confirmDeleteButton.addEventListener('click', function () {
             if (deleteId) {
                 // Perform the delete operation (example: redirect to a PHP delete script)
-                window.location.href = `delete_sale.php?id=${deleteId}`;
+                window.location.href = `all_reports.php?id=${deleteId}&func=delete`;
             }
         });
     </script>

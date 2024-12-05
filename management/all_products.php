@@ -300,6 +300,7 @@
                                 <select class="form-select" id="category" name="category" required>
                                     <option value="Beverages">Beverages</option>
                                     <option value="Snacks">Snacks</option>
+                                    <option value="Soft Drinks">Soft Drinks</option>
                                     <option value="Juices">Juices</option>
                                     <option value="Energy Drinks">Energy Drinks</option>
                                 </select>
@@ -419,6 +420,7 @@
                                 <option selected disabled value="">Choose a category...</option>
                                 <option value="Beverages">Beverages</option>
                                 <option value="Snacks">Snacks</option>
+                                <option value="Soft Drinks">Soft Drinks</option>
                                 <option value="Juices">Juices</option>
                                 <option value="Energy Drinks">Energy Drinks</option>
                             </select>
